@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar — pre-token protocols, ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Token Launch Radar</h1>
+    <p class="sub">Which protocol with no token recorded is worth farming next — and what to do about it. Snapshot <span id="asOf">—</span> · <span id="counts">—</span></p>
+  </div>
+  <div class="badge">Implied value is this radar's own claim, not a prediction that a token will launch, or when.</div>
+</header>
+
+<section class="model" id="modelCard">
+  <h2>How the value is fitted — read this before trusting the board</h2>
+  <p id="modelText">Loading model…</p>
+  <div class="stats" id="valStats"></div>
+  <p class="note">“Records no token” is DefiLlama's record, never proof a protocol has none. A wrapped, staked or bridged product of a token that already trades is not a launch waiting to happen, and is kept off the watchlist. Live-token protocols are shown separately below: they already trade, so they are never ranked for a launch.</p>
+</section>
+
+<section class="controls">
+  <input id="q" type="search" placeholder="Search name or slug…" aria-label="Search">
+  <select id="cat" aria-label="Category"><option value="">All categories</option></select>
+  <select id="chain" aria-label="Chain"><option value="">All chains</option></select>
+  <label class="chk"><input type="checkbox" id="watchOnly"> Watchlist only (40)</label>
+  <label class="chk"><input type="checkbox" id="preOnly" checked> Pre-token only</label>
+  <select id="sort" aria-label="Sort by">
+    <option value="rank">Sort: implied value</option>
+    <option value="tvl">Sort: TVL</option>
+    <option value="growth">Sort: 7-day growth</option>
+    <option value="odds">Sort: launch odds</option>
+    <option value="age">Sort: age</option>
+  </select>
+</section>
+
+<main>
+  <table id="board">
+    <thead><tr>
+      <th data-k="rank">#</th><th data-k="name">Protocol</th><th data-k="category">Category</th>
+      <th data-k="chains">Chains</th><th data-k="tvl">TVL</th><th data-k="growth">7d</th>
+      <th data-k="odds">Launch odds</th><th data-k="value">Implied value</th><th>Range</th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <p id="shown" class="shown"></p>
+
+  <section id="detail" class="detail" hidden>
+    <button id="closeDetail" type="button">Close ×</button>
+    <h2 id="dName">—</h2>
+    <p id="dMeta" class="meta"></p>
+    <div class="dgrid" id="dGrid"></div>
+    <h3>How to farm it — costed steps</h3>
+    <ol id="dSteps"></ol>
+    <p class="note" id="dWarn"></p>
+  </section>
+
+  <section class="live">
+    <h2>Already trading — the reference the model was fitted on</h2>
+    <p class="note">These 24 protocols already have a token, so they are not ranked for a launch. Their market cap over TVL is what the fitted multiple is learned from: the median multiple falls from 0.42 at $5–50M TVL to 0.03 above $1B, which is why a flat multiple would overvalue the biggest pre-token protocols.</p>
+    <table id="liveTable">
+      <thead><tr><th>Protocol</th><th>Category</th><th>TVL</th><th>Market cap</th><th>FDV / TVL</th><th>Fitted FDV</th></tr></thead>
+      <tbody id="liveRows"></tbody>
+    </table>
+  </section>
+</main>
+<footer>Data: DefiLlama snapshot, sealed for this bounty. Model and validation are computed from that snapshot at run time; see the model card above.</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
